@@ -22,13 +22,18 @@
 <body>
     <h1>Home</h1>
 
-    <button>Home</button>
-
-    <button>profile</button>
-    
-    <button>report</button>
-    
-    <button>logout</button>
+    <button>
+        <a href="{{ url('/home') }}">Home</a>
+    </button>
+    <button>
+        <a href="{{ url('/profile') }}">Profile</a>
+    </button>
+    <button>
+        <a href="{{ url('/report') }}">Report</a>
+    </button>
+    <button>
+        <a href="{{ url('/logout') }}">Logout</a>
+    </button>
 
     <div>
         <strong>wellcome</strong> : {{$customer->username}} <br>
@@ -74,38 +79,38 @@
         <hr>
     </div>
     <table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Action</th>
-            <th>Category</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($products as $product)
+        <thead>
             <tr>
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->harga }}</td>
-                <td>{{ $product->stok }}</td>
-                <td>
-                    <form action="/buy" method="GET">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <button type="submit">Beli</button>
-                    </form>
-                </td>
-                <td>
-                    @if ($product->categories)
-                        @foreach ($product->categories as $item)
-                            <span class="tag">{{ $item->name }}</span>
-                        @endforeach
-                    @endif
-                </td>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Action</th>
+                <th>Category</th>
             </tr>
-        @endforeach
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach($products as $product)
+                <tr>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->harga }}</td>
+                    <td>{{ $product->stok }}</td>
+                    <td>
+                        <form action="/buy" method="GET">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <button type="submit">Beli</button>
+                        </form>
+                    </td>
+                    <td>
+                        @if ($product->categories)
+                            @foreach ($product->categories as $item)
+                                <span class="tag">{{ $item->name }}</span>
+                            @endforeach
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </body>
 </html>

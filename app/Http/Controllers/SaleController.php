@@ -54,6 +54,7 @@ class SaleController extends Controller
         $sale->customer_id = $customer->id;
         $sale->saldo_akhir = $customer->saldo;
         $sale->keterangan = $keterangan;
+        $sale->save();
 
         return redirect('/home');
     }

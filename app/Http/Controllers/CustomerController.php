@@ -38,4 +38,9 @@ class CustomerController extends Controller
             return redirect()->back()->withInput()->withErrors(['login-error' => 'Data tidak valid.']);
         }
     }
+
+
+    public function profile_page(){
+        return view('profile');
+    }
 }
