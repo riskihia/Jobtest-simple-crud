@@ -47,6 +47,22 @@ class CustomerController extends Controller
 
     // PROFILE ##########
     public function profile_page(){
-        return view('profile');
+        $customer = Customer::find(session('customer_id'));
+
+        if (!$customer) {
+            return redirect('/login'); 
+        }
+
+        return view('profile')->with('customer', $customer);
+    }
+
+    public function topup(Request $request){
+        $customer = Customer::find($request->input('customer_id'));
+        $nominal = $request->input('nominal_topup');
+
+        $customer->saldo += $nominal;
+        $customer->save();
+
+        return redirect()->back();
     }
 }

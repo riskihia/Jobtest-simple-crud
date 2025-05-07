@@ -11,10 +11,7 @@ class ProductController extends Controller
     //
     public function filter(Request $request)
     {
-        $customerId = session('customer');
-        if (!$customerId) {
-            return redirect('/login')->withErrors(['login-error' => 'Silakan login terlebih dahulu.']);
-        }
+        $customerId = session('customer_id');
         $customer = Customer::find($customerId);
 
         $selectedCategories = $request->input('categories', []);

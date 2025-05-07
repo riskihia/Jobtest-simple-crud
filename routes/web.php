@@ -27,8 +27,9 @@ Route::middleware([CustomerAuth::class])->group(function(){
 
     Route::get('/report', [ReportController::class, 'index']);
 
-
+    ### Profile
     Route::get('/profile', [CustomerController::class, 'profile_page']);
+    Route::post('/profile-topup', [CustomerController::class, 'topup']);
 
 });
 

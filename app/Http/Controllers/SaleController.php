@@ -18,10 +18,8 @@ class SaleController extends Controller
 
     public function buy(Request $request){
 
-        $customerId = session('customer');
-        if (!$customerId) {
-            return redirect('/login')->withErrors(['login-error' => 'Silakan login terlebih dahulu.']);
-        }
+        $customerId = session('customer_id');
+        
         $customer = Customer::find($customerId);
         
         $product = Product::find($request->input('product_id'));
