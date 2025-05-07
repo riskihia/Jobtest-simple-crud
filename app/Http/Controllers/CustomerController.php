@@ -32,14 +32,20 @@ class CustomerController extends Controller
         }
     
         if (Hash::check($password, $customer->password)) {
-            session(['customer' => $customer->id]);
+            session(['customer_id' => $customer->id]);
             return redirect('/home');
         } else {
             return redirect()->back()->withInput()->withErrors(['login-error' => 'Data tidak valid.']);
         }
     }
 
+    public function logout(){
+        session()->forget('customer_id');
+        
+        return redirect('/login')->with('success', 'Anda telah logout.');
+    }
 
+    // PROFILE ##########
     public function profile_page(){
         return view('profile');
     }

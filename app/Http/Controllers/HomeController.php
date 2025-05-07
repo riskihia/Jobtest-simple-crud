@@ -11,18 +11,14 @@ class HomeController extends Controller
     //
     public function homepage()
     {
-        if (!session()->has('customer')) {
-            return redirect('/login');
-        }
 
-        $customer = Customer::find(session('customer'));
+        $customer = Customer::find(session('customer_id'));
 
         if (!$customer) {
             return redirect('/login'); 
         }
 
         $products = Product::all();
-        // dd($products->categories[1]->name);
 
         return view('home', compact('customer', 'products'));
     }

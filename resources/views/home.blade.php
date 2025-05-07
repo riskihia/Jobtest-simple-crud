@@ -90,25 +90,27 @@
         </thead>
         <tbody>
             @foreach($products as $product)
-                <tr>
-                    <td>{{ $product->name }}</td>
-                    <td>{{ $product->harga }}</td>
-                    <td>{{ $product->stok }}</td>
-                    <td>
-                        <form action="/buy" method="GET">
-                            @csrf
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            <button type="submit">Beli</button>
-                        </form>
-                    </td>
-                    <td>
-                        @if ($product->categories)
-                            @foreach ($product->categories as $item)
-                                <span class="tag">{{ $item->name }}</span>
-                            @endforeach
-                        @endif
-                    </td>
-                </tr>
+                @if ($product->stok > 0)
+                    <tr>
+                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->harga }}</td>
+                        <td>{{ $product->stok }}</td>
+                        <td style="dis">
+                            <form action="/buy" method="GET">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <button type="submit">Beli</button>
+                            </form>
+                        </td>
+                        <td>
+                            @if ($product->categories)
+                                @foreach ($product->categories as $item)
+                                    <span class="tag">{{ $item->name }}</span>
+                                @endforeach
+                            @endif
+                        </td>
+                    </tr>
+                @endif
             @endforeach
         </tbody>
     </table>

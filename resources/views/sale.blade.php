@@ -9,6 +9,8 @@
 <body>
     <h1>Konfirmasi pembelian</h1>
 
+    <p><a href={{ url('home') }}>Back</a></p>
+
     @if ($errors->has('saldo'))
         <div style="color:red;">
             {{ $errors->first('saldo') }}
