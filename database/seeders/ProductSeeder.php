@@ -14,38 +14,46 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         //
-        Product::create([
+        $product = Product::create([
             "name"=>"meja",
             "harga"=>1200,
             "stok"=>14
         ]);
-        Product::create([
+        $product->categories()->attach([1, 2]);
+        
+        $product = Product::create([
             "name"=>"kursi",
             "harga"=>800,
             "stok"=>32
         ]);
+        $product->categories()->attach([1, 2]);
 
-        Product::create([
+        $product = Product::create([
             "name"=>"mobil",
             "harga"=>23000,
             "stok"=>5
         ]);
-        Product::create([
+        $product->categories()->attach(3);
+
+        $product = Product::create([
             "name"=>"sepeda",
             "harga"=>11000,
             "stok"=>8
         ]);
+        $product->categories()->attach(3);
 
-
-        Product::create([
+        $product = Product::create([
             "name"=>"kompor",
             "harga"=>17000,
             "stok"=>9
         ]);
-        Product::create([
+        $product->categories()->attach([2,3]);
+
+        $product = Product::create([
             "name"=>"kulkas",
             "harga"=>21000,
             "stok"=>3
         ]);
+        $product->categories()->attach(2);
     }
 }
