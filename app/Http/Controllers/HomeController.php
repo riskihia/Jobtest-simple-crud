@@ -22,10 +22,7 @@ class HomeController extends Controller
         }
 
         $products = Product::all();
-        // foreach($products as $product){
-        //     echo($product->name);
-        // }
-        // dd("selesai");
+        // dd($products->categories[1]->name);
 
         return view('home', compact('customer', 'products'));
     }
