@@ -11,7 +11,19 @@
 
     <p><strong>Username : </strong> {{ $customer->username }}</p>
     <p><strong>Saldo : </strong> {{ $customer->saldo }}</p>
-    <p><strong>Kontak : </strong> {{ $customer->kontak }}</p>
+    <div>
+        @if ($errors->has('contact-error'))
+            <div style="color:red;">
+                {{ $errors->first('contact-error') }}
+            </div>
+        @endif
+        <form action="/update-contact" method="POST">
+        @csrf
+            <span><strong>Kontak : </strong></span>
+            <input type="text" name="contact" id="kontak" value="{{ $customer->kontak }}">
+            <button type="submit">Update contact</button>
+        </form>
+    </div>
 
     <button><a href={{url('/home')}}>Back</a></button>
     <hr>
@@ -19,7 +31,7 @@
     <div>
         <form action="/profile-topup" method="POST">
         @csrf
-            <p>Lakuakn top up</p>
+            <p>Lakukan top up</p>
             <span>Masukan jumlah : </span>
 
             <input type="hidden" name="customer_id" value={{ $customer->id }}>

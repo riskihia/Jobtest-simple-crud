@@ -6,16 +6,16 @@
     <title>login</title>
 </head>
 <body>
-    <h1>Login</h1>
+    <h1>Register</h1>
     
-    @if ($errors->has('login-error'))
+    @if ($errors->has('register-error'))
         <div style="color:red;">
-            {{ $errors->first('login-error') }}
+            {{ $errors->first('register-error') }}
         </div>
     @endif
 
 
-    <form action="{{ url('/login') }}" method="POST">
+    <form action="{{ url('/register') }}" method="POST">
         @csrf
 
         <span>Username</span>
@@ -26,9 +26,9 @@
         <input type="password" name="password" required>
     
         <br>
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
     </form>
     <br>
-    <button><a href="/register">Register</a></button>
+    <button><a href="/login">Login</a></button>
 </body>
 </html>

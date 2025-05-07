@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('username', 100)->nullable(false);
             $table->string('password', 100)->nullable(false);
             $table->integer('saldo')->nullable(false);
-            $table->string('kontak', 100)->nullable(false);
+            $table->string('kontak', 100)->nullable(true);
             $table->timestamps();
         });
     }

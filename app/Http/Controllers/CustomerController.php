@@ -16,6 +16,29 @@ class CustomerController extends Controller
         return view('login');
     }
 
+    public function show_register(){
+        return view('register');
+    }
+
+    public function register(Request $request){
+        $username = $request->input('username');
+        $password = $request->input('password');
+        
+        $customer = Customer::where('username', $username)->first();
+        if($customer){
+            return redirect()->back()->withInput()->withErrors(["register-error"=> "Customer already exist"]);
+        }
+
+        $customer = new Customer();
+        $customer->username = $username;
+        $customer->password = bcrypt($password);
+        $customer->saldo = 10000; //defaultnya 10k aja
+        $customer->save();
+
+        session(['customer_id' => $customer->id]);
+        return redirect('/home');
+    }
+
     public function login(Request $request){
         $request->validate([
             'username' => 'required|string',
@@ -49,10 +72,6 @@ class CustomerController extends Controller
     public function profile_page(){
         $customer = Customer::find(session('customer_id'));
 
-        if (!$customer) {
-            return redirect('/login'); 
-        }
-
         return view('profile')->with('customer', $customer);
     }
 
@@ -61,6 +80,21 @@ class CustomerController extends Controller
         $nominal = $request->input('nominal_topup');
 
         $customer->saldo += $nominal;
+        $customer->save();
+
+        return redirect()->back();
+    }
+
+    public function update_contact(Request $request){
+        $customer = Customer::find(session('customer_id'));
+
+        $contact_number = $request->input('contact');
+
+        if($contact_number === $customer->kontak){
+            return redirect()->back()->withInput()->withErrors(["contact-error" => "Tidak ada perubahan"]);
+        }
+
+        $customer->kontak = $contact_number;
         $customer->save();
 
         return redirect()->back();

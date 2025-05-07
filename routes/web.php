@@ -6,12 +6,18 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SaleController;
 use App\Http\Middleware\CustomerAuth;
+use App\Http\Middleware\CustomerGuest;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [CustomerController::class, 'index']);
-Route::get('/login', [CustomerController::class, 'show']);
-Route::post('/login', [CustomerController::class, 'login']);
+Route::middleware([CustomerGuest::class])->group(function(){
+    Route::get('/', [CustomerController::class, 'index']);
+    Route::get('/login', [CustomerController::class, 'show']);
+    Route::post('/login', [CustomerController::class, 'login']);
+    
+    Route::get('/register', [CustomerController::class, 'show_register']);
+    Route::post('/register', [CustomerController::class, 'register']);
+});
 
 Route::middleware([CustomerAuth::class])->group(function(){
     Route::get('/logout', [CustomerController::class, 'logout']);
@@ -30,6 +36,8 @@ Route::middleware([CustomerAuth::class])->group(function(){
     ### Profile
     Route::get('/profile', [CustomerController::class, 'profile_page']);
     Route::post('/profile-topup', [CustomerController::class, 'topup']);
+
+    Route::post('/update-contact', [CustomerController::class, 'update_contact']);
 
 });
 
