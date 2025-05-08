@@ -38,6 +38,7 @@ Route::middleware([CustomerAuth::class])->group(function(){
 
 
     Route::get('/report', [ReportController::class, 'index']);
+    Route::post('/delete-report', [ReportController::class, 'delete_report']);
 });
 
 

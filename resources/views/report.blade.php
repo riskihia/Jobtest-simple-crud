@@ -24,7 +24,11 @@
     <h1>Report</h1>
     <span><a href={{ url('home') }}>Back</a></span>
     <br>
-
+    @if (session('success'))
+        <div style="color:rgb(0, 190, 0)">
+            {{ session('success') }}
+        </div>
+    @endif
     <table>
         <thead>
             <tr>
@@ -36,6 +40,9 @@
                 <th>Saldo akhir</th>
                 <th>Keterangan</th>
                 <th>Tanggal</th>
+                <th>
+                    Action
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -49,6 +56,13 @@
                     <td>{{ $report->saldo_akhir }}</td>
                     <td>{{ $report->keterangan }}</td>
                     <td>{{ $report->created_at }}</td>
+                    <td>
+                        <form action="/delete-report" method="POST">
+                            @csrf
+                            <input type="hidden" name="report_id" value={{$report->id}} id="report_id">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
