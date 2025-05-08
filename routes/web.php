@@ -22,6 +22,12 @@ Route::middleware([CustomerGuest::class])->group(function(){
 Route::middleware([CustomerAuth::class])->group(function(){
     Route::get('/logout', [CustomerController::class, 'logout']);
     
+    ### Profile
+    Route::get('/profile', [CustomerController::class, 'profile_page']);
+    Route::post('/profile-topup', [CustomerController::class, 'topup']);
+
+    Route::post('/update-contact', [CustomerController::class, 'update_contact']);
+
     Route::get('/home', [HomeController::class, 'homepage']);
 
     Route::get('/product-filter', [ProductController::class, 'filter']);
@@ -32,13 +38,6 @@ Route::middleware([CustomerAuth::class])->group(function(){
 
 
     Route::get('/report', [ReportController::class, 'index']);
-
-    ### Profile
-    Route::get('/profile', [CustomerController::class, 'profile_page']);
-    Route::post('/profile-topup', [CustomerController::class, 'topup']);
-
-    Route::post('/update-contact', [CustomerController::class, 'update_contact']);
-
 });
 
 
