@@ -21,6 +21,11 @@ class CustomerController extends Controller
     }
 
     public function register(Request $request){
+        $request->validate([
+            'username' => 'required|string|min:5|alpha',
+            'password' => 'required|string|min:6',
+        ]);
+
         $username = $request->input('username');
         $password = $request->input('password');
         
@@ -39,12 +44,7 @@ class CustomerController extends Controller
         return redirect('/home');
     }
 
-    public function login(Request $request){
-        $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string',
-        ]);
-    
+    public function login(Request $request){    
         $username = $request->input('username');
         $password = $request->input('password');
     

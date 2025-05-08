@@ -7,12 +7,17 @@
 </head>
 <body>
     <h1>Register</h1>
-    
-    @if ($errors->has('register-error'))
-        <div style="color:red;">
-            {{ $errors->first('register-error') }}
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
     @endif
+
 
 
     <form action="{{ url('/register') }}" method="POST">
